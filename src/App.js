@@ -1,9 +1,19 @@
 import React from 'react';
 import './App.css';
 import {useState} from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
+import NavBar from "./component/navbar";
+import FormAuthent from './component/formAuth';
+import FormInscription from './component/formInscription';
+import monProfil from './component/profil';
+
+const setToken = (userToken) => {
+  sessionStorage.setItem('token', JSON.stringify(userToken));
+} 
 
 const App = () => {
   const [msg, setMsg] = useState('');
+  const token = localStorage.getItem("token");
 
   const handleClick = async () => {
     const data = await fetch('/api/test');
@@ -12,14 +22,29 @@ const App = () => {
 
     setMsg(msg);
   }
-
   
-  return (
+  if(!token) {
+    
+    return <div className="App"> 
+      <FormAuthent setToken={setToken} />
+      <BrowserRouter>
+      <Route path="/inscription" component={FormInscription}></Route>
+      </BrowserRouter>
+      </div>
+  }
+
+  return ( 
     <div className="App"> 
-      <button onClick={handleClick}>
-        Hello World !
-      </button>
-      <p>{msg}</p>
+      <BrowserRouter>
+        <NavBar></NavBar>
+        <Route path="/connexion" component={FormAuthent}></Route>
+        <Route path="/inscription" component={FormInscription}></Route>
+        <Route path="/profil" component={monProfil}></Route>
+        <button onClick={handleClick}>
+          Hello World !
+        </button>
+        <p>{msg}</p>
+      </BrowserRouter>
     </div>
   );
 }
