@@ -8,17 +8,16 @@ const logOut = () => {
 }
 
 const NavBar = ({ user }) => (
-  <nav>
-    {user && <span>{user.nom}</span>}
+  <nav class="navbar navbar-light bg-light">
     <NavLink exact to="/" activeClassName="select">
       Accueil
     </NavLink>
-    <NavLink to="/connexion" activeClassName="select">
+    {/*<NavLink to="/connexion" activeClassName="select">
       Connexion
     </NavLink>
     <NavLink to="/inscription" activeClassName="select">
       Inscription
-    </NavLink>
+    </NavLink>*/}
     <NavLink to="/profil" activeClassName="select">
       Mon profil
     </NavLink>
