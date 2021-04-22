@@ -16,7 +16,7 @@ const FormInscription = () => {
     else
     {
       setPassword(passwordConfirm.toString());
-    return fetch("http://localhost:5000/api/signup", {
+    return fetch(localStorage.getItem("serveurURL") + "/api/signup", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ name, email, passwordReg }),
