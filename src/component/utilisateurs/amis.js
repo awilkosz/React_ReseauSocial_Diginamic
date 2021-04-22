@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Ami = ({ ami }) => {
 
     const accepter = () => {
-        console.log("CLIQUEZ BANDE DE ****** !!!");
+        console.log("test");
     }
 
     return (
