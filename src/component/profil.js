@@ -15,6 +15,18 @@ const Profil = () => {
         fetchMessages();
     }, [fetchMessages]);
 
+    const inviterUtilisateur = useCallback(() => {
+        let idUser = localStorage.getItem("userId");
+        let idAmi = localStorage.getItem("profilId");
+        fetch(localStorage.getItem("serveurURL") + "/api/demandeAmi", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ idUser, idAmi }),
+          }).then(() => {
+            alert("Votre demande d'ami a bien été envoyée");
+          });
+    })
+
     return(
         <div>
             <h1>Mon mur</h1>
@@ -23,9 +35,9 @@ const Profil = () => {
 
             <div className="container">
                 <div className="row align-items-start">
-                    {/*
-                        localStorage.getItem("profilId") === localStorage.getItem("userId") &&
-                        <div className="col"><h3>Mes amis</h3></div>*/
+                    {
+                        localStorage.getItem("profilId") !== localStorage.getItem("userId") &&
+                        <button onClick={inviterUtilisateur}>Ajouter aux amis</button>
                     }
                     
                     {

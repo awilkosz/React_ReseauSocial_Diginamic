@@ -13,11 +13,6 @@ const Utilisateur = ({ utilisateur }) => {
             <div className="col-sm">
                 <NavLink to="/profil" activeClassName="select" onClick={enregistreIdUser}>{utilisateur.name} : {utilisateur.email}</NavLink>
             </div>
-            <div className="col-sm">
-                {utilisateur.id.toString() !== localStorage.getItem("userId") &&
-                <button>Demander en ami</button>
-                }
-            </div>
           </div>
       </div>
     );
