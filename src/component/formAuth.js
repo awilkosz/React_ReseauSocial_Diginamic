@@ -16,6 +16,7 @@ const connectHandler = (credentials) => {
       .then((reponse) => {
         if(reponse.token) {
           localStorage.setItem("userId", reponse.user.id.toString());
+          localStorage.setItem("profilId", reponse.user.id.toString());
           localStorage.setItem("userName", reponse.user.name);
           localStorage.setItem("userEmail", reponse.user.email);
           setMessage("Connecté " + email);

@@ -7,8 +7,8 @@ const FormMessage = ({ onChange }) => {
 
   const post = () => {
     let author = localStorage.getItem("userId");
-    let desti = author;
-    fetch("http://localhost:5000/api/messages/nouveaumessage", {
+    let desti = localStorage.getItem("profilId");
+    fetch(localStorage.getItem("serveurURL") + "/api/messages/nouveaumessage", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ contenu, confidentialite, author, desti }),
@@ -20,10 +20,12 @@ const FormMessage = ({ onChange }) => {
 
   return (
     <div>
-      <label htmlFor="contenu">Message : </label>
-      <input
+      <label htmlFor="contenu">Nouveau message </label>
+      <br />
+      <textarea
         name="contenu"
         value={contenu}
+        className="form-control"
         onChange={(e) => setContenu(e.target.value)}
       />
       <br />

@@ -6,7 +6,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import NavBar from "./component/navbar";
 import FormAuthent from './component/formAuth';
 import FormInscription from './component/formInscription';
-import monProfil from './component/profil';
+import Profil from './component/profil';
+import rechercheUtilisateurs from './component/recherche';
 
 const setToken = (userToken) => {
   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -15,6 +16,8 @@ const setToken = (userToken) => {
 const App = () => {
   const [msg, setMsg] = useState('');
   const token = localStorage.getItem("token");
+
+  localStorage.setItem("serveurURL", "http://localhost:5000");
 
   const handleClick = async () => {
     const data = await fetch('/api/test');
@@ -40,7 +43,8 @@ const App = () => {
         <NavBar></NavBar>
         <Route path="/connexion" component={FormAuthent}></Route>
         <Route path="/inscription" component={FormInscription}></Route>
-        <Route path="/profil" component={monProfil}></Route>
+        <Route path="/profil" component={Profil}></Route>
+        <Route path="/recherche" component={rechercheUtilisateurs}></Route>
         <button onClick={handleClick}>
           Hello World !
         </button>
