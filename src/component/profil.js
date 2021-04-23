@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import ListeMessages from './messages/listeMessages';
 import ListeAmis from './utilisateurs/listeAmis';
+import FilActualite from './messages/filActualite';
 
 const Profil = () => {
     const [utilisateur, setUtilisateur] = useState([]);
@@ -51,7 +52,7 @@ const Profil = () => {
                     <ListeMessages className="col"></ListeMessages>
                     {
                         localStorage.getItem("profilId") === localStorage.getItem("userId") &&
-                        <div className="col"><h3>Quoi de neuf ?</h3></div>
+                        <FilActualite></FilActualite>
                     }
                 </div>
             </div>
