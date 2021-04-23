@@ -1,8 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import ListeMessages from './messages/listeMessages';
 import ListeAmis from './utilisateurs/listeAmis';
-import ListeDemandeAmis from './utilisateurs/listeDemandeAmis';
-//import ListeAmis from './utilisateurs/listeAmis';
 
 const Profil = () => {
     const [utilisateur, setUtilisateur] = useState([]);
@@ -47,26 +45,15 @@ const Profil = () => {
                     
                     {
                         localStorage.getItem("profilId") === localStorage.getItem("userId") && 
-                        <div className="col">
-                            <h3>Vos amis</h3>
-
-                            <div>
-                                <h4>Invitations reçues</h4>
-                                <ListeDemandeAmis></ListeDemandeAmis>
-                            </div>
-                            <div>
-                                <h4>Liste d'amis</h4>
-                                <ListeAmis ></ListeAmis>
-                            </div>
-                        </div>
+                        <ListeAmis></ListeAmis>
                     }
-                    {
+                    {/*
                         localStorage.getItem("profilId") !== localStorage.getItem("userId") && 
                         <div className="col">
                             <h3>Amis de {utilisateur.name}</h3>
 
                             <div><h4>Liste d'amis</h4></div>
-                        </div>
+                        </div>*/
                     }
                     
                     
