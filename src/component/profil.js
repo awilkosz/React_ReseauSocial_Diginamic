@@ -1,6 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import ListeMessages from './messages/listeMessages';
 import ListeAmis from './utilisateurs/listeAmis';
+import ListeDemandeAmis from './utilisateurs/listeDemandeAmis';
+//import ListeAmis from './utilisateurs/listeAmis';
 
 const Profil = () => {
     const [utilisateur, setUtilisateur] = useState([]);
@@ -15,7 +17,10 @@ const Profil = () => {
         fetchMessages();
     }, [fetchMessages]);
 
-    const inviterUtilisateur = useCallback(() => {
+    /**
+     * Invite un utilisateur à rejoindre la liste d'amis
+     */
+    const inviterUtilisateur = () => {
         let idUser = localStorage.getItem("userId");
         let idAmi = localStorage.getItem("profilId");
         fetch(localStorage.getItem("serveurURL") + "/api/demandeAmi", {
@@ -25,7 +30,7 @@ const Profil = () => {
           }).then(() => {
             alert("Votre demande d'ami a bien été envoyée");
           });
-    })
+    }
 
     return(
         <div>
@@ -45,10 +50,13 @@ const Profil = () => {
                         <div className="col">
                             <h3>Vos amis</h3>
 
-                            <div><h4>Invitations reçues</h4></div>
+                            <div>
+                                <h4>Invitations reçues</h4>
+                                <ListeDemandeAmis></ListeDemandeAmis>
+                            </div>
                             <div>
                                 <h4>Liste d'amis</h4>
-                                <ListeAmis></ListeAmis>
+                                <ListeAmis ></ListeAmis>
                             </div>
                         </div>
                     }

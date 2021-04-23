@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect } from 'react';
-import Ami from './amis';
+import DemandeAmi from './demandeAmis';
 
-const ListeAmis = () => {
+const ListeDemandeAmis = () => {
     const [amis, setAmis] = useState([]);
     const fetchAmis = useCallback(() => {
         let id = localStorage.getItem("userId");
-        fetch(localStorage.getItem("serveurURL") + "/api/getAmis/" + id)
+        fetch(localStorage.getItem("serveurURL") + "/api/getDemandesAmi/" + id)
             .then((rawResult) => rawResult.json())
             .then((result) => {setAmis(result)});
     }, []);
@@ -18,11 +18,11 @@ const ListeAmis = () => {
         <div>
             <div>
                 {amis.map((ami) => (
-                <Ami onChange={fetchAmis} key={ami.id} ami={ami}></Ami>
+                <DemandeAmi onChange={fetchAmis} key={ami.id} ami={ami}></DemandeAmi>
                 ))}
             </div>
         </div>
       );
 };
 
-export default ListeAmis;
+export default ListeDemandeAmis;
