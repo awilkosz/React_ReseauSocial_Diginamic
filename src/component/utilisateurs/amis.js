@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { useState } from 'react';
 
 const Ami = ({ ami, onChange, onChangeAmis }) => {
     const id = ami.id;
@@ -18,20 +17,26 @@ const Ami = ({ ami, onChange, onChangeAmis }) => {
         });
     };
 
-    return (
-      <div className="container">
-          <div className="row">
-            <div className="col-sm">
-                <NavLink to="/profil" activeClassName="select">{ami.name} : {ami.email}</NavLink>
-            </div>
-            <div>
-              {ami.statut === 0 &&
-                <button onClick={accepter.bind(id)}>Accepter</button>
-              }
-            </div>
-          </div>
-      </div>
-    );
+  const enregistreIdUser = (e) => {
+      e.preventDefault();
+      localStorage.setItem("profilId", ami.id.toString());
+      window.location.replace("/profil");
   };
+
+  return (
+    <div className="container">
+        <div className="row">
+          <div className="col-sm">
+              <NavLink to="/profil" onClick={enregistreIdUser} activeClassName="select">{ami.name} : {ami.email}</NavLink>
+          </div>
+          <div>
+            {ami.statut === 0 &&
+              <button onClick={accepter.bind(id)}>Accepter</button>
+            }
+          </div>
+        </div>
+    </div>
+  );
+};
   
   export default Ami;

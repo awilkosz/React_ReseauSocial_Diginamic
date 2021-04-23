@@ -4,12 +4,15 @@ import ListeAmis from './utilisateurs/listeAmis';
 
 const Profil = () => {
     const [utilisateur, setUtilisateur] = useState([]);
+
     const fetchMessages = useCallback(() => {
         let userId = localStorage.getItem("profilId");
-        fetch("http://localhost:5000/api/getUser/" + userId)
+        fetch(localStorage.getItem("serveurURL") + "/api/getUser/" + userId)
             .then((rawResult) => rawResult.json())
             .then((result) => setUtilisateur(result));
     }, []);
+
+    
 
     useEffect(() => {
         fetchMessages();
@@ -42,20 +45,8 @@ const Profil = () => {
                         localStorage.getItem("profilId") !== localStorage.getItem("userId") &&
                         <button onClick={inviterUtilisateur}>Ajouter aux amis</button>
                     }
-                    
-                    {
-                        localStorage.getItem("profilId") === localStorage.getItem("userId") && 
-                        <ListeAmis></ListeAmis>
-                    }
-                    {/*
-                        localStorage.getItem("profilId") !== localStorage.getItem("userId") && 
-                        <div className="col">
-                            <h3>Amis de {utilisateur.name}</h3>
 
-                            <div><h4>Liste d'amis</h4></div>
-                        </div>*/
-                    }
-                    
+                    <ListeAmis></ListeAmis>
                     
                     <ListeMessages className="col"></ListeMessages>
                     {
