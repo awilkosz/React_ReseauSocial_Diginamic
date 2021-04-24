@@ -7,6 +7,9 @@ const FormInscription = () => {
   const [passwordReg, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [message, setMessage] = useState("");
+  const [errPseudo, setErrPseudo] = useState("");
+  const [errMail, setErrMail] = useState("");
+  const [errMdp, setErrMdp] = useState("");
 
   const inscHandler = (credentials) => {
     if(passwordReg !== passwordConfirm) {
@@ -33,6 +36,7 @@ const FormInscription = () => {
         }
         else {
           setMessage("oups");
+          console.log(reponse);
         }
 
       }
@@ -46,33 +50,99 @@ const FormInscription = () => {
   };
 
   const handleSubmit = async e => {
-    const token = await inscHandler({
-        name,
-        email,
-        passwordReg
-    });
-    localStorage.setItem("token", token);
-    
-    if(token !== "") {
-      window.location.replace("/profil");
+    setMessage("Hello world");
+    verifPseudo();
+    verifEmail();
+    verifMdp();
+
+    if(verifPseudo() && verifEmail() && verifMdp())
+    {
+      const token = await inscHandler({
+          name,
+          email,
+          passwordReg
+      });
+
+      if(token !== undefined) {
+        localStorage.setItem("token", token);
+        window.location.replace("/profil");
+      }
     }
+  }
+
+  const verifEmail = () => {
+    var email = document.getElementById('email').value,
+        flag = false,
+        regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+        
+    if(!regex.test(email)) {
+      setErrMail("L'adresse email n'a pas le bon format");
+    }
+    else if(email.length < 4) {
+      setErrMail("L' adresse email doit faire quatre caractères minimum");
+    }
+    else {
+      setErrMail("");
+      flag = true; 
+    }
+    return flag;
 }
+
+const verifPseudo = () => {
+
+  var pseudo = document.getElementById('pseudo').value,
+      flag = false;
+
+    if(pseudo === "")
+    {
+      setErrPseudo("Le pseudo est obligatoire");
+    }
+    else if(pseudo.length < 4)
+    {
+      setErrPseudo("Le pseudo doit faire au moins quatre caractères");
+    }
+    else
+    {
+      setErrPseudo("");
+      flag = true;
+    }
+    return flag;
+  }
+
+  const verifMdp = () => {
+    var regex = /^(?=.{10,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/,
+        mdp = document.getElementById('mdp').value;
+    
+    if(!regex.test(mdp)){
+      setErrMdp("Le mot de passe doit faire 10 caractères minimum et contenir au moins une majuscule, une minuscule, un chiffre, et un caractère spécial");
+      return false;
+    }
+    else{
+      setErrMdp("");
+      return true;
+    }
+  }
 
   return (
     <Form {...layout}>
+      <h2>Inscription</h2>
       <Form.Item label={"Pseudo"}>
-        <Input value={name} onChange={(e) => setName(e.target.value)}/>
+        <Input value={name} id="pseudo" onChange={(e) => setName(e.target.value)}/>
       </Form.Item>
+      {errPseudo}
       <Form.Item label={"Email"}>
-        <Input value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <Input value={email} id="email" onChange={(e) => setEmail(e.target.value)}/>
       </Form.Item>
+      {errMail}
       <Form.Item label={"Mot de passe"}>
         <Input
           value={passwordReg}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
+          id="mdp"
         />
       </Form.Item>
+      {errMdp}
       <Form.Item label={"Confirmer le mot de passe"}>
         <Input
           value={passwordConfirm}
@@ -80,8 +150,9 @@ const FormInscription = () => {
           type="password"
         />
       </Form.Item>
-      <Button type="primary" htmlType="submit" onClick={handleSubmit}>S'inscrire</Button>
       {message}
+      <br />
+      <Button type="primary" htmlType="submit" onClick={handleSubmit}>S'inscrire</Button>
     </Form>
   );
 };

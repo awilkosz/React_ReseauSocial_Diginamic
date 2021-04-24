@@ -19,9 +19,9 @@ const FormMessage = ({ onChange }) => {
   };
 
   return (
-    <div>
-      <label htmlFor="contenu">Nouveau message </label>
-      <br />
+    <div class="border border-secondary p-2 rounded">
+      <label htmlFor="contenu"><h6>Publier un message</h6></label>
+
       <textarea
         name="contenu"
         value={contenu}
@@ -30,17 +30,38 @@ const FormMessage = ({ onChange }) => {
       />
       <br />
 
-      <label htmlFor="confidentialite">Confidentialité : </label>
-      <br />
+      <h6 class="text-start">Confidentialité : </h6>
 
-      Privé: <input type="radio" name="confidentialité" value="Privé" onChange={(e) => setConfidentialite(e.target.value)} />
-      <br />
-      Amis seulement: <input type="radio" name="confidentialité" value="Amis" onChange={(e) => setConfidentialite(e.target.value)} />
-      <br />
-      Public: <input type="radio" name="confidentialité" value="Public" onChange={(e) => setConfidentialite(e.target.value)} />
-      <br />
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="confidentialite" value="Public" id="public" onChange={(e) => setConfidentialite(e.target.value)} />
+        <p class="text-start">
+          <label class="form-check-label" for="public">
+            public
+          </label>
+        </p>
+      </div>
+      
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="confidentialite" value="Amis" id="amisUniquement" onChange={(e) => setConfidentialite(e.target.value)} />
+        <p class="text-start">
+          <label class="form-check-label" for="amisUniquement">
+            Amis uniquement
+          </label>
+        </p>
+      </div>
 
-      <button onClick={() => post()}>Envoyer</button>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="confidentialite" value="Privé" id="prive" onChange={(e) => setConfidentialite(e.target.value)} />
+        <p class="text-start">
+          <label class="form-check-label" for="prive">
+            Privé
+          </label>
+        </p>
+        
+      </div>
+      
+
+      <button class="btn btn-primary" onClick={() => post()}>Envoyer</button>
       {message}
     </div>
   );

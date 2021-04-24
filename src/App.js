@@ -16,20 +16,21 @@ const App = () => {
   const token = localStorage.getItem("token");
 
   localStorage.setItem("serveurURL", "http://localhost:5000");
-  
+
   if(!token) {
     
-    return <div className="App"> 
+    return (<div className="App">
+      <h1>Bienvenue sur Digisocial !</h1>
       <FormAuthent setToken={setToken} />
       <BrowserRouter>
       <Route path="/inscription" component={FormInscription}></Route>
       </BrowserRouter>
-      </div>
+      </div>)
   }
 
   return ( 
     <div className="App"> 
-      <BrowserRouter>
+        <BrowserRouter>
         <NavBar></NavBar>
         <Route path="/connexion" component={FormAuthent}></Route>
         <Route path="/inscription" component={FormInscription}></Route>

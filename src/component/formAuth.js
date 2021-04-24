@@ -19,11 +19,10 @@ const connectHandler = (credentials) => {
           localStorage.setItem("profilId", reponse.user.id.toString());
           localStorage.setItem("userName", reponse.user.name);
           localStorage.setItem("userEmail", reponse.user.email);
-          setMessage("Connecté " + email);
           return reponse.token; 
         }
         else {
-          setMessage("oups");
+          setMessage("Vos informations de connexion sont incorrectes.");
         }
 
       }
@@ -40,15 +39,18 @@ const connectHandler = (credentials) => {
           email,
           password
       });
-      localStorage.setItem("token", token);
       
-      if(token !== "") {
+      if(token !== undefined) {
+        localStorage.setItem("token", token);
+        setToken(token);
         window.location.replace("/profil");
       }
+
   }
 
   return (
     <Form {...layout} onSubmit={handleSubmit}>
+      <h2>Connexion</h2>
       <Form.Item label={"Email"}>
         <Input value={email} onChange={(e) => setEmail(e.target.value)}/>
       </Form.Item>
@@ -60,7 +62,7 @@ const connectHandler = (credentials) => {
         />
       </Form.Item>
       <Button type="submit" onClick={handleSubmit}>Se Connecter</Button>
-      {message}
+      <p className="danger">{message}</p>
       <br />
       <a href="/inscription" >Pas encore inscrit ? Inscrivez vous</a>
     </Form>

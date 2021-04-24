@@ -20,12 +20,12 @@ const setProfilIdToUserId = (e) => {
 
 const NavBar = ({ user }) => (
   <nav className="navbar navbar-light bg-light">
-    <NavLink exact to="/" activeClassName="select">
-      Accueil
-    </NavLink>
     <NavLink onClick={setProfilIdToUserId} to="/profil" activeClassName="select">
       Mon profil
     </NavLink>
+    <h5>
+      DigiSocial
+    </h5>
     <form className="d-flex">
       <input className="form-control-me-2" id="recherche" type="text" name="rechercheUtilisateur" placeholder="recherche" />
       <NavLink to="/recherche" onClick={rechercher} className="btn btn-outline-success">

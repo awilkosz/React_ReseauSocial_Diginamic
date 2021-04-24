@@ -5,11 +5,16 @@ const Message = ({ message }) => {
     };
 
   return (
-      <div>
-        <span>{message.emmetId} : {message.contenu}</span>
-        {message.emmetId.toString() !== localStorage.getItem("userId") &&
-        <button onClick={aimer.bind()}>J'aime</button>
-        }
+      <div class="card mt-2">
+        <div class="card-header">
+          {message.emmetId}
+        </div>
+        <div class="card-body">
+          <p class="card-text"> {message.contenu}</p>
+          {message.emmetId.toString() !== localStorage.getItem("userId") &&
+          <button class="btn btn-secondary" onClick={aimer.bind()}>J'aime</button>
+          }
+        </div>
       </div>
     );
   };

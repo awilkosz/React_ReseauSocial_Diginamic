@@ -36,24 +36,37 @@ const Profil = () => {
 
     return(
         <div>
-            <h1>Mon mur</h1>
-            <p>Id du profil: {localStorage.getItem("profilId")}</p>
-            <p>Bonjour {utilisateur.name} !</p>
+            {localStorage.getItem("profilId") === localStorage.getItem("userId") &&
+                <h1>Mon mur</h1>
+            }
+            {localStorage.getItem("profilId") !== localStorage.getItem("userId") &&
+                <h1>Profil de {utilisateur.name} </h1>
+            }
+            
 
-            <div className="container">
-                <div className="row align-items-start">
+            <div>
+                <div>
                     {
                         localStorage.getItem("profilId") !== localStorage.getItem("userId") &&
                         <button onClick={inviterUtilisateur}>Ajouter aux amis</button>
                     }
 
-                    <ListeAmis></ListeAmis>
-                    
-                    <ListeMessages className="col"></ListeMessages>
-                    {
-                        localStorage.getItem("profilId") === localStorage.getItem("userId") &&
-                        <FilActualite></FilActualite>
-                    }
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3">
+                                <ListeAmis></ListeAmis>
+                            </div>
+                            <div class="col-6">
+                                <ListeMessages className="col"></ListeMessages>
+                            </div>
+                            <div class="col-3">
+                            {
+                                localStorage.getItem("profilId") === localStorage.getItem("userId") &&
+                                <FilActualite></FilActualite>
+                            }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
