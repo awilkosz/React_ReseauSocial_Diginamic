@@ -14,18 +14,9 @@ const setToken = (userToken) => {
 } 
 
 const App = () => {
-  const [msg, setMsg] = useState('');
   const token = localStorage.getItem("token");
 
   localStorage.setItem("serveurURL", "http://localhost:5000");
-
-  const handleClick = async () => {
-    const data = await fetch('/api/test');
-    const json = await data.json();
-    const msg = json.msg;
-
-    setMsg(msg);
-  }
   
   if(!token) {
     
@@ -45,10 +36,6 @@ const App = () => {
         <Route path="/inscription" component={FormInscription}></Route>
         <Route path="/profil" component={Profil}></Route>
         <Route path="/recherche" component={rechercheUtilisateurs}></Route>
-        <button onClick={handleClick}>
-          Hello World !
-        </button>
-        <p>{msg}</p>
       </BrowserRouter>
     </div>
   );

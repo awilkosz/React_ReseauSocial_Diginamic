@@ -1,9 +1,14 @@
 const Message = ({ message }) => {
-    return (
+
+  const aimer = () => {
+    console.log("Appeler la fonction");
+    };
+
+  return (
       <div>
         <span>{message.emmetId} : {message.contenu}</span>
         {message.emmetId.toString() !== localStorage.getItem("userId") &&
-        <button>J'aime</button>
+        <button onClick={aimer.bind()}>J'aime</button>
         }
       </div>
     );
