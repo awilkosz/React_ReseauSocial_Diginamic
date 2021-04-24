@@ -19,7 +19,7 @@ const FormMessage = ({ onChange }) => {
   };
 
   return (
-    <div class="border border-secondary p-2 rounded">
+    <div className="border border-secondary p-2 rounded">
       <label htmlFor="contenu"><h6>Publier un message</h6></label>
 
       <textarea
@@ -31,30 +31,30 @@ const FormMessage = ({ onChange }) => {
       />
       <br />
 
-      <h6 class="text-start">Confidentialité : </h6>
+      <h6 className="text-start">Confidentialité : </h6>
 
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="confidentialite" value="Public" id="public" required onChange={(e) => setConfidentialite(e.target.value)} />
-        <p class="text-start">
-          <label class="form-check-label" for="public">
+      <div className="form-check">
+        <input className="form-check-input" type="radio" name="confidentialite" value="Public" id="public" required onChange={(e) => setConfidentialite(e.target.value)} />
+        <p className="text-start">
+          <label className="form-check-label" htmlFor="public">
             public
           </label>
         </p>
       </div>
       
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="confidentialite" value="Amis" id="amisUniquement" onChange={(e) => setConfidentialite(e.target.value)} />
-        <p class="text-start">
-          <label class="form-check-label" for="amisUniquement">
+      <div className="form-check">
+        <input className="form-check-input" type="radio" name="confidentialite" value="Amis" id="amisUniquement" onChange={(e) => setConfidentialite(e.target.value)} />
+        <p className="text-start">
+          <label className="form-check-label" htmlFor="amisUniquement">
             Amis uniquement
           </label>
         </p>
       </div>
 
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="confidentialite" value="Privé" id="prive" onChange={(e) => setConfidentialite(e.target.value)} />
-        <p class="text-start">
-          <label class="form-check-label" for="prive">
+      <div className="form-check">
+        <input className="form-check-input" type="radio" name="confidentialite" value="Privé" id="prive" onChange={(e) => setConfidentialite(e.target.value)} />
+        <p className="text-start">
+          <label className="form-check-label" htmlFor="prive">
             Privé
           </label>
         </p>
@@ -62,7 +62,7 @@ const FormMessage = ({ onChange }) => {
       </div>
       
 
-      <button class="btn btn-primary" onClick={() => post()}>Envoyer</button>
+      <button className="btn btn-primary" onClick={() => post()}>Envoyer</button>
       {message}
     </div>
   );

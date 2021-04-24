@@ -5,6 +5,8 @@ import FilActualite from './messages/filActualite';
 
 const Profil = () => {
     const [utilisateur, setUtilisateur] = useState([]);
+    const [etreAmi, setEtreAmi] = useState([]);
+    let estAmi = 0;
 
     const fetchMessages = useCallback(() => {
         let userId = localStorage.getItem("profilId");
@@ -13,11 +15,26 @@ const Profil = () => {
             .then((result) => setUtilisateur(result));
     }, []);
 
-    
+    const sontAmis = useCallback(() => {
+        let userId = localStorage.getItem("userId");
+        let amiId = localStorage.getItem("profilId");
+        fetch(localStorage.getItem("serveurURL") + "/api/getEtreAmis/" + userId + "/" + amiId)
+            .then((rawResult) => rawResult.json())
+            .then((result) => setEtreAmi(result));
+    }, []);
 
     useEffect(() => {
         fetchMessages();
     }, [fetchMessages]);
+
+    useEffect(() => {
+        sontAmis();
+    }, [sontAmis]);
+
+
+    etreAmi.map((etrAm) => (
+        estAmi = etrAm.estAmi
+    ));
 
     /**
      * Invite un utilisateur à rejoindre la liste d'amis
@@ -34,6 +51,16 @@ const Profil = () => {
           });
     }
 
+    const renderBoutonAmi = () => {
+        if(localStorage.getItem("profilId") !== localStorage.getItem("userId"))
+        {
+            if(estAmi === 0)
+                return <button onClick={inviterUtilisateur}>Ajouter aux amis</button>
+            else
+                return <p>Cet utilisateur fait partie de votre liste d'amis</p>
+        }
+    }
+
     return(
         <div>
             {localStorage.getItem("profilId") === localStorage.getItem("userId") &&
@@ -43,23 +70,19 @@ const Profil = () => {
                 <h1>Profil de {utilisateur.name} </h1>
             }
             
-
             <div>
                 <div>
-                    {
-                        localStorage.getItem("profilId") !== localStorage.getItem("userId") &&
-                        <button onClick={inviterUtilisateur}>Ajouter aux amis</button>
-                    }
+                    {renderBoutonAmi()}
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-3">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-3">
                                 <ListeAmis></ListeAmis>
                             </div>
-                            <div class="col-6">
+                            <div className="col-6">
                                 <ListeMessages className="col"></ListeMessages>
                             </div>
-                            <div class="col-3">
+                            <div className="col-3">
                             {
                                 localStorage.getItem("profilId") === localStorage.getItem("userId") &&
                                 <FilActualite></FilActualite>

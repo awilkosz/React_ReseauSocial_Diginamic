@@ -5,14 +5,14 @@ const Message = ({ message }) => {
     };
 
   return (
-      <div class="card mt-2">
-        <div class="card-header">
+      <div className="card mt-2">
+        <div className="card-header">
           {message.emmetId}
         </div>
-        <div class="card-body">
-          <p class="card-text"> {message.contenu}</p>
+        <div className="card-body">
+          <p className="card-text"> {message.contenu}</p>
           {message.emmetId.toString() !== localStorage.getItem("userId") &&
-          <button class="btn btn-secondary" onClick={aimer.bind()}>J'aime</button>
+          <button className="btn btn-secondary" onClick={aimer.bind()}>J'aime</button>
           }
         </div>
       </div>
