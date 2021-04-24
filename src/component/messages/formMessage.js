@@ -26,6 +26,7 @@ const FormMessage = ({ onChange }) => {
         name="contenu"
         value={contenu}
         className="form-control"
+        placeholder="Votre message ici"
         onChange={(e) => setContenu(e.target.value)}
       />
       <br />
@@ -33,7 +34,7 @@ const FormMessage = ({ onChange }) => {
       <h6 class="text-start">Confidentialité : </h6>
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="confidentialite" value="Public" id="public" onChange={(e) => setConfidentialite(e.target.value)} />
+        <input class="form-check-input" type="radio" name="confidentialite" value="Public" id="public" required onChange={(e) => setConfidentialite(e.target.value)} />
         <p class="text-start">
           <label class="form-check-label" for="public">
             public

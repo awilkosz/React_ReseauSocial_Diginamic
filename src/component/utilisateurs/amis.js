@@ -15,6 +15,17 @@ const Ami = ({ ami, onChange, onChangeAmis }) => {
         onChange();
         onChangeAmis();
         });
+
+        setTimeout(() => {
+          fetch(localStorage.getItem("serveurURL") + "/api/creerAmitie", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ idUser, idAmi }),
+          }).then(() => {
+            onChange();
+            onChangeAmis();
+          });
+        }, 1000);
     };
 
   const enregistreIdUser = (e) => {
@@ -31,7 +42,7 @@ const Ami = ({ ami, onChange, onChangeAmis }) => {
           </div>
           <div>
             {ami.statut === 0 &&
-              <button onClick={accepter.bind(id)}>Accepter</button>
+              <button class="btn btn-secondary" onClick={accepter.bind(id)}>Accepter</button>
             }
           </div>
         </div>
