@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import './bootstrap/css/bootstrap.min.css';
-import {useState} from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import NavBar from "./component/navbar";
 import FormAuthent from './component/formAuth';
