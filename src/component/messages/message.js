@@ -4,6 +4,7 @@ const Message = ({ message }) => {
 
   const [nbLikes, setNbLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(0);
+  const [conf, setConf] = useState("");
 
   /**
    * Aime le message d'un ami
@@ -49,6 +50,18 @@ const Message = ({ message }) => {
         });
   }, []);
 
+  const changerConfidentialite = (eValue) => {
+    let id = message.id;
+    let privacy = eValue;
+    fetch(localStorage.getItem("serveurURL") + "/api/messages/changePrivacy", {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ id, privacy }),
+    }).then(() => {
+      alert("La confidentialité de ce message a bien été modifiée");
+    });
+  };
+
   useEffect(() => {
     getNbLikes();
   }, [getNbLikes]);
@@ -78,6 +91,31 @@ const Message = ({ message }) => {
         <div className="card mt-2">
         <div className="card-header text-start">
           {message.name}
+          {message.emmetId.toString() === localStorage.getItem("userId") &&
+            <div>
+              {message.privacy === "Public" &&
+                <select onChange={(e) => changerConfidentialite(e.target.value)} className="form-control" name="confidentialite" id="confidentialite">
+                  <option value="Public" defaultValue>Public</option>
+                  <option value="Amis" >Amis uniquement</option>
+                  <option value="Privé">Privé</option>
+                </select>
+              }
+              {message.privacy === "Amis" &&
+                <select onChange={() => changerConfidentialite()} className="form-control" name="confidentialite" id="confidentialite">
+                  <option value="Amis" defaultValue>Amis uniquement</option>
+                  <option value="Public">Public</option>
+                  <option value="Privé">Privé</option>
+                </select>
+              }
+              {message.privacy === "Privé" &&
+                <select onChange={() => changerConfidentialite()} className="form-control" name="confidentialite" id="confidentialite">
+                  <option value="Privé">Privé</option>
+                  <option value="Public">Public</option>
+                  <option value="Amis" defaultValue>Amis uniquement</option>
+                </select>
+              }
+            </div>
+          }
         </div>
         <div className="card-body">
           <p className="card-text"> {message.contenu}</p>
