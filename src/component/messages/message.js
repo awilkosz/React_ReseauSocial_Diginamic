@@ -7,7 +7,7 @@ const Message = ({ message }) => {
   return (
       <div className="card mt-2">
         <div className="card-header">
-          {message.emmetId}
+          {message.name}
         </div>
         <div className="card-body">
           <p className="card-text"> {message.contenu}</p>
