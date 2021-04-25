@@ -27,6 +27,7 @@ const FormMessage = ({ onChange }) => {
         value={contenu}
         className="form-control"
         placeholder="Votre message ici"
+        rows="4"
         onChange={(e) => setContenu(e.target.value)}
       />
       <br />
