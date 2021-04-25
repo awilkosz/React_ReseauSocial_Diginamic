@@ -3,8 +3,8 @@ import { Form } from "antd";
 
 const FormMessage = ({ onChange }) => {
   const [contenu, setContenu] = useState("");
-  const [confidentialite, setConfidentialite] = useState("");
-  const [message, setMessage] = useState("");
+  const [confidentialite, setConfidentialite] = useState("Public");
+  //const [message, setMessage] = useState("");
 
   const post = () => {
     let author = localStorage.getItem("userId");
@@ -14,9 +14,9 @@ const FormMessage = ({ onChange }) => {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ contenu, confidentialite, author, desti }),
-    }).then(() => {
-      setMessage("Votre message a bien été publié");
-      onChange();
+    }).then(() => { setTimeout( () => {
+      //setMessage("Votre message a bien été publié");
+      onChange(); }, 2000);
     });
   };
 
@@ -38,7 +38,7 @@ const FormMessage = ({ onChange }) => {
       <h6 className="text-start">Confidentialité : </h6>
 
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="confidentialite" value="Public" id="public" required onChange={(e) => setConfidentialite(e.target.value)} />
+        <input className="form-check-input" type="radio" name="confidentialite" value="Public" id="public" onChange={(e) => setConfidentialite(e.target.value)} />
         <p className="text-start">
           <label className="form-check-label" htmlFor="public">
             public
@@ -67,7 +67,7 @@ const FormMessage = ({ onChange }) => {
       
 
       <button type="submit" className="btn btn-primary" onClick={() => post()}>Envoyer</button>
-      {message}
+      {/*message*/}
     </div>
     </Form>
   );

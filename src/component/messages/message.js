@@ -67,8 +67,15 @@ const Message = ({ message }) => {
     }
   }
 
-  return (
-      <div className="card mt-2">
+  /**
+   * Cette fonction affiche ou non un message en fonction de sa confidentialité
+   * @returns Une div contenant le message à afficher
+   */
+  const renderMessage = () => {
+    if((message.emmetId.toString() === localStorage.getItem("userId")) || (message.emmetId.toString() !== localStorage.getItem("userId") && (message.privacy === "Public" || message.privacy === "Amis")))
+    {
+      return(
+        <div className="card mt-2">
         <div className="card-header text-start">
           {message.name}
         </div>
@@ -77,6 +84,14 @@ const Message = ({ message }) => {
           {renderBoutonAime()}
           <p>{nbLikes} j'aimes</p>
         </div>
+      </div>
+      )
+    }
+  }
+
+  return (
+      <div>
+        {renderMessage()}
       </div>
     );
   };
