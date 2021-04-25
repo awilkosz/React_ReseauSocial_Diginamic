@@ -49,20 +49,27 @@ const connectHandler = (credentials) => {
   }
 
   return (
-    <Form {...layout} onSubmit={handleSubmit}>
+    <Form {...layout} onSubmit={handleSubmit} className="border rounded m-4 bg-white">
       <h2>Connexion</h2>
-      <Form.Item label={"Email"}>
-        <Input value={email} onChange={(e) => setEmail(e.target.value)}/>
-      </Form.Item>
-      <Form.Item label={"Mot de passe"}>
-        <Input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-        />
-      </Form.Item>
-      <Button type="submit" onClick={handleSubmit}>Se Connecter</Button>
-      <p className="danger">{message}</p>
+      <div className="d-flex justify-content-center">
+        <Form.Item label={"Email"}>
+          <Input className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        </Form.Item>
+      </div>
+
+      <div className="d-flex justify-content-center">
+        <Form.Item label={"Mot de passe"}>
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            className="form-control"
+          />
+        </Form.Item>
+      </div>
+      <br />
+      <Button className="btn btn-primary" type="submit" onClick={handleSubmit}>Se Connecter</Button>
+      <p className="text-danger">{message}</p>
       <br />
       <a href="/inscription" >Pas encore inscrit ? Inscrivez vous</a>
     </Form>

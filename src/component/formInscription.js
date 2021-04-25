@@ -12,36 +12,30 @@ const FormInscription = () => {
   const [errMdp, setErrMdp] = useState("");
 
   const inscHandler = (credentials) => {
-    if(passwordReg !== passwordConfirm) {
-      setMessage("Les mots de passe ne correspondent pas");
-      return "";
-    }
-    else
-    {
-      setPassword(passwordConfirm.toString());
+    setPassword(passwordConfirm.toString());
     return fetch(localStorage.getItem("serveurURL") + "/api/signup", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name, email, passwordReg }),
-    })
-      .then((reponse) => reponse.json())
-      .then((reponse) => {
-        if(reponse.token) {
-          localStorage.setItem("userId", reponse.user.id.toString());
-          localStorage.setItem("profilId", reponse.user.id.toString());
-          localStorage.setItem("userName", reponse.user.name);
-          localStorage.setItem("userEmail", reponse.user.email);
-          setMessage("Connecté " + email);
-          return reponse.token; 
-        }
-        else {
-          setMessage("oups");
-          console.log(reponse);
-        }
-
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name, email, passwordReg }),
+  })
+    .then((reponse) => reponse.json())
+    .then((reponse) => {
+      if(reponse.token) {
+        localStorage.setItem("userId", reponse.user.id.toString());
+        localStorage.setItem("profilId", reponse.user.id.toString());
+        localStorage.setItem("userName", reponse.user.name);
+        localStorage.setItem("userEmail", reponse.user.email);
+        setMessage("Connecté " + email);
+        return reponse.token; 
       }
-      );
+      else {
+        setMessage("L'adresse mail que vous avez saisie est déja utilisée");
+        console.log(reponse);
+      }
+
     }
+    );
+    
   };
 
   const layout = {
@@ -50,12 +44,12 @@ const FormInscription = () => {
   };
 
   const handleSubmit = async e => {
-    setMessage("Hello world");
     verifPseudo();
     verifEmail();
     verifMdp();
+    verifCorrespondance();
 
-    if(verifPseudo() && verifEmail() && verifMdp())
+    if(verifPseudo() && verifEmail() && verifMdp() && verifCorrespondance())
     {
       const token = await inscHandler({
           name,
@@ -123,36 +117,61 @@ const verifPseudo = () => {
     }
   }
 
+  const verifCorrespondance = () => {
+    if(passwordReg !== passwordConfirm) {
+      setMessage("Les mots de passe ne correspondent pas");
+      return false;
+    }
+    else
+    {
+      setMessage("");
+      return true;
+    }
+  }
+
   return (
-    <Form {...layout}>
+    <Form {...layout} className="border rounded m-4 bg-white">
       <h2>Inscription</h2>
-      <Form.Item label={"Pseudo"}>
-        <Input value={name} id="pseudo" onChange={(e) => setName(e.target.value)}/>
-      </Form.Item>
-      {errPseudo}
-      <Form.Item label={"Email"}>
-        <Input value={email} id="email" onChange={(e) => setEmail(e.target.value)}/>
-      </Form.Item>
-      {errMail}
-      <Form.Item label={"Mot de passe"}>
-        <Input
-          value={passwordReg}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          id="mdp"
-        />
-      </Form.Item>
-      {errMdp}
-      <Form.Item label={"Confirmer le mot de passe"}>
-        <Input
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          type="password"
-        />
-      </Form.Item>
-      {message}
+      <div className="d-flex justify-content-center">
+        <Form.Item label={"Pseudo"}>
+          <Input value={name} className="form-control" id="pseudo" onChange={(e) => setName(e.target.value)}/>
+        </Form.Item>
+      </div>
+      <p className="text-danger">{errPseudo}</p>
+
+      <div className="d-flex justify-content-center">
+        <Form.Item label={"Email"}>
+          <Input className="form-control" value={email} id="email" onChange={(e) => setEmail(e.target.value)}/>
+        </Form.Item>
+      </div>
+      <p className="text-danger">{errMail}</p>
+
+      <div className="d-flex justify-content-center">
+        <Form.Item label={"Mot de passe"}>
+          <Input
+            value={passwordReg}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            className="form-control"
+            id="mdp"
+          />
+        </Form.Item>
+      </div>
+      <p className="text-danger">{errMdp}</p>
+
+        <div className="d-flex justify-content-center">
+          <Form.Item label={"Confirmer le mot de passe"} className="form-label">
+            <Input
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              type="password"
+              className="form-control"
+            />
+          </Form.Item>
+        </div>
+        <p className="text-danger">{message}</p>
       <br />
-      <Button type="primary" htmlType="submit" onClick={handleSubmit}>S'inscrire</Button>
+      <Button className="btn btn-primary mb-2" type="primary" htmlType="submit" onClick={handleSubmit}>S'inscrire</Button>
     </Form>
   );
 };

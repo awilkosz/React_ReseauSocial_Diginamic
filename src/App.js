@@ -19,7 +19,7 @@ const App = () => {
 
   if(!token) {
     
-    return (<div className="App">
+    return (<div className="App bg-light">
       <h1>Bienvenue sur Digisocial !</h1>
       <FormAuthent setToken={setToken} />
       <BrowserRouter>

@@ -76,13 +76,13 @@ const Profil = () => {
 
                     <div className="container">
                         <div className="row">
-                            <div className="col-3">
+                            <div className="col-3 bg-white">
                                 <ListeAmis></ListeAmis>
                             </div>
-                            <div className="col-6">
+                            <div className="col-6 bg-white">
                                 <ListeMessages className="col"></ListeMessages>
                             </div>
-                            <div className="col-3">
+                            <div className="col-3 bg-white">
                             {
                                 localStorage.getItem("profilId") === localStorage.getItem("userId") &&
                                 <FilActualite></FilActualite>
