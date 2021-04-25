@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form } from "antd";
 
 const FormMessage = ({ onChange }) => {
   const [contenu, setContenu] = useState("");
@@ -8,6 +9,7 @@ const FormMessage = ({ onChange }) => {
   const post = () => {
     let author = localStorage.getItem("userId");
     let desti = localStorage.getItem("profilId");
+
     fetch(localStorage.getItem("serveurURL") + "/api/messages/nouveaumessage", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -19,6 +21,7 @@ const FormMessage = ({ onChange }) => {
   };
 
   return (
+    <Form onSubmit={post}>
     <div className="border border-secondary p-2 rounded">
       <label htmlFor="contenu"><h6>Publier un message</h6></label>
 
@@ -63,9 +66,10 @@ const FormMessage = ({ onChange }) => {
       </div>
       
 
-      <button className="btn btn-primary" onClick={() => post()}>Envoyer</button>
+      <button type="submit" className="btn btn-primary" onClick={() => post()}>Envoyer</button>
       {message}
     </div>
+    </Form>
   );
 };
 

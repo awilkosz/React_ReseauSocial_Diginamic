@@ -5,6 +5,9 @@ const Message = ({ message }) => {
   const [nbLikes, setNbLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(0);
 
+  /**
+   * Aime le message d'un ami
+   */
   const aimer = () => {
     let idUser = localStorage.getItem("userId");
     let idMessage = message.id;
@@ -19,6 +22,9 @@ const Message = ({ message }) => {
     });
   };
 
+  /**
+   * Récupère le nombre de "j'aimes" d'un message
+   */
   const getNbLikes = useCallback(() => {
     fetch(localStorage.getItem("serveurURL") + "/api/getNombresLike/" + message.id)
         .then((rawResult) => rawResult.json())
@@ -29,6 +35,9 @@ const Message = ({ message }) => {
         });
   }, []);
 
+  /**
+   * Détermine si l'utilisateur a aimé le message
+   */
   const estUnMessageAime = useCallback(() => {
     let userId = localStorage.getItem("userId");
     fetch(localStorage.getItem("serveurURL") + "/api/estUnMessageAime/" + userId + "/" + message.id)
