@@ -15,7 +15,7 @@ const setToken = (userToken) => {
 const App = () => {
   const token = localStorage.getItem("token");
 
-  localStorage.setItem("serveurURL", "http://localhost:5000");
+  localStorage.setItem("serveurURL", "https://node-reseau-social-diginamic.herokuapp.com");
 
   if(!token) {
     
