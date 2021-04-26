@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import Message from './message';
 import FormMessage from './formMessage';
+import { message } from 'antd';
 
 const ListeMessages = ({ nomProfil }) => {
     const [messages, setMessages] = useState([]);
@@ -54,6 +55,10 @@ const ListeMessages = ({ nomProfil }) => {
                 {messages.map((message) => (
                 <Message key={message.id} message={message}></Message>
                 ))}
+            {
+                messages.length === 0 &&
+                <p>Aucun message pour l'instant</p>
+            }
             </div>
         </div>
       );
