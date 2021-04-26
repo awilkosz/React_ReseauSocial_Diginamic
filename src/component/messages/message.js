@@ -50,6 +50,10 @@ const Message = ({ message }) => {
         });
   }, []);
 
+  /**
+   * Change la confidentialité d'un message
+   * @param {*Nouvelle valeur pour la confidentialité} eValue 
+   */
   const changerConfidentialite = (eValue) => {
     let id = message.id;
     let privacy = eValue;
@@ -70,6 +74,10 @@ const Message = ({ message }) => {
     estUnMessageAime();
 }, [estUnMessageAime]);
 
+  /**
+   * Désactive le bouton si l'utilisateur a aimé le message
+   * @returns Un bouton
+   */
   const renderBoutonAime = () => {
     if(message.emmetId.toString() !== localStorage.getItem("userId"))
     {
