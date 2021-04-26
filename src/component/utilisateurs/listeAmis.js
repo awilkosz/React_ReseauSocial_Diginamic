@@ -37,10 +37,10 @@ const ListeAmis = () => {
     return ( 
 
         <div className="col">
-            <h3>Vos amis</h3>
+            
             {localStorage.getItem("profilId") === localStorage.getItem("userId") &&
             <div>
-                
+                <h3>Vos amis</h3>
                 <h4>Invitations reçues</h4>
                 <div>
                     <div>
@@ -52,7 +52,7 @@ const ListeAmis = () => {
 
             </div>
             }
-            
+            <hr/>
             <div>
                 <h4>Liste d'amis</h4>
                 {amis.map((ami) => (

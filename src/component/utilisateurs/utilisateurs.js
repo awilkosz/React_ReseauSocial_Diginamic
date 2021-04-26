@@ -11,7 +11,7 @@ const Utilisateur = ({ utilisateur }) => {
       <div className="container">
           <div className="row">
             <div className="col-sm">
-                <NavLink to="/profil" activeClassName="select" onClick={enregistreIdUser}>
+                <NavLink className="border border-light" to="/profil" activeClassName="select" onClick={enregistreIdUser}>
                   {utilisateur.name} : {utilisateur.email}
                 </NavLink>
             </div>

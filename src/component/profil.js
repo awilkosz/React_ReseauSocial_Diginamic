@@ -8,6 +8,9 @@ const Profil = () => {
     const [etreAmi, setEtreAmi] = useState([]);
     let estAmi = 0;
 
+    /**
+     * Récupère les messages du profil courant
+     */
     const fetchMessages = useCallback(() => {
         let userId = localStorage.getItem("profilId");
         fetch(localStorage.getItem("serveurURL") + "/api/getUser/" + userId)
@@ -15,6 +18,9 @@ const Profil = () => {
             .then((result) => setUtilisateur(result));
     }, []);
 
+    /**
+     * Vérifie si le profil visité par l'utilisateur est celui d'un ami
+     */
     const sontAmis = useCallback(() => {
         let userId = localStorage.getItem("userId");
         let amiId = localStorage.getItem("profilId");
@@ -51,13 +57,17 @@ const Profil = () => {
           });
     }
 
+    /**
+     * Evite d'afficher le bouton d'invitation si on est sur le profil d'un ami
+     * @returns Un bouton ou un paragraphe
+     */
     const renderBoutonAmi = () => {
         if(localStorage.getItem("profilId") !== localStorage.getItem("userId"))
         {
             if(estAmi === 0)
-                return <button onClick={inviterUtilisateur}>Ajouter aux amis</button>
+                return <button className="btn btn-secondary mb-3" onClick={inviterUtilisateur}>Ajouter aux amis</button>
             else
-                return <p>Cet utilisateur fait partie de votre liste d'amis</p>
+                return <p className="mb-3">Cet utilisateur fait partie de votre liste d'amis</p>
         }
     }
 
@@ -76,18 +86,20 @@ const Profil = () => {
 
                     <div className="container">
                         <div className="row">
-                            <div className="col-3 bg-white">
+                            <div className="col-2 bg-white rounded">
                                 <ListeAmis></ListeAmis>
                             </div>
-                            <div className="col-6 bg-white">
+                            <div className="col-6 bg-white m-2 rounded">
                                 <ListeMessages className="col"></ListeMessages>
                             </div>
-                            <div className="col-3 bg-white">
                             {
                                 localStorage.getItem("profilId") === localStorage.getItem("userId") &&
-                                <FilActualite></FilActualite>
-                            }
+                                <div className="col-3 bg-white rounded">
+                                
+                                    <FilActualite></FilActualite>
+                                
                             </div>
+                            }
                         </div>
                     </div>
                 </div>

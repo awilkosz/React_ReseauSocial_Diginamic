@@ -21,7 +21,7 @@ const FormMessage = ({ onChange }) => {
   };
 
   return (
-    <Form onSubmit={post}>
+    <Form onSubmit={post} className="mt-2">
     <div className="border border-secondary p-2 rounded">
       <label htmlFor="contenu"><h6>Publier un message</h6></label>
 
