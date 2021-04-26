@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+//import { useCallback } from 'react';
 
 const Ami = ({ ami, onChange, onChangeAmis }) => {
     const id = ami.id;
@@ -27,6 +28,17 @@ const Ami = ({ ami, onChange, onChangeAmis }) => {
           });
         }, 1000);
     };
+
+  /*const refuser = useCallback(() => {
+    let idUser = localStorage.getItem("userId");
+    let idAmi = id;
+    fetch(localStorage.getItem("serveurURL") + "/api/refuserInvitation/" + idUser + "/" + idAmi)
+        .then((rawResult) => rawResult.json())
+        .then((result) => {
+          onChange();
+          onChangeAmis();
+        });
+  }, []);*/
 
   const enregistreIdUser = (e) => {
       e.preventDefault();

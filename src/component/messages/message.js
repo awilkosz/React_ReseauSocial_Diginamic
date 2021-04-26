@@ -96,19 +96,19 @@ const Message = ({ message }) => {
               {message.privacy === "Public" &&
                 <select onChange={(e) => changerConfidentialite(e.target.value)} className="form-control" name="confidentialite" id="confidentialite">
                   <option value="Public" defaultValue>Public</option>
-                  <option value="Amis" >Amis uniquement</option>
+                  <option value="Amis">Amis uniquement</option>
                   <option value="Privé">Privé</option>
                 </select>
               }
               {message.privacy === "Amis" &&
-                <select onChange={() => changerConfidentialite()} className="form-control" name="confidentialite" id="confidentialite">
+                <select onChange={(e) => changerConfidentialite(e.target.value)} className="form-control" name="confidentialite" id="confidentialite">
                   <option value="Amis" defaultValue>Amis uniquement</option>
                   <option value="Public">Public</option>
                   <option value="Privé">Privé</option>
                 </select>
               }
               {message.privacy === "Privé" &&
-                <select onChange={() => changerConfidentialite()} className="form-control" name="confidentialite" id="confidentialite">
+                <select onChange={(e) => changerConfidentialite(e.target.value)} className="form-control" name="confidentialite" id="confidentialite">
                   <option value="Privé">Privé</option>
                   <option value="Public">Public</option>
                   <option value="Amis" defaultValue>Amis uniquement</option>
