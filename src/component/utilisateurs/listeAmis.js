@@ -41,6 +41,7 @@ const ListeAmis = () => {
             {localStorage.getItem("profilId") === localStorage.getItem("userId") &&
             <div>
                 <h3>Vos amis</h3>
+                <hr/>
                 <h4>Invitations reçues</h4>
                 <div>
                     <div>
