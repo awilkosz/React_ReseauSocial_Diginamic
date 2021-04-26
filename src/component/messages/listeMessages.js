@@ -45,7 +45,9 @@ const ListeMessages = () => {
             <FormMessage onChange={fetchMessages}></FormMessage>
             }
             <div>
+            {localStorage.getItem("userId") === localStorage.getItem("profilId") &&
                 <h2>Mes publications</h2>
+            }
                 {messages.map((message) => (
                 <Message key={message.id} message={message}></Message>
                 ))}
