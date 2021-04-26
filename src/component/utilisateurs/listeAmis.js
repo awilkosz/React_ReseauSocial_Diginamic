@@ -47,6 +47,10 @@ const ListeAmis = () => {
                         {demandesAmis.map((ami) => (
                         <Ami onChange={fetchDemandesAmis} onChangeAmis={fetchAmis}  key={ami.id} ami={ami}></Ami>
                         ))}
+                        {
+                            demandesAmis.length === 0 &&
+                            <p>Aucune demandes reçues</p>
+                        }
                     </div>
                 </div>
 
@@ -58,6 +62,10 @@ const ListeAmis = () => {
                 {amis.map((ami) => (
                     <DemandeAmi onChange={fetchAmis} key={ami.id} ami={ami}></DemandeAmi>
                 ))}
+                {
+                    amis.length === 0 &&
+                    <p>Aucun ami dans cette liste pour l'instant</p>
+                }
             </div>
         </div>
 
