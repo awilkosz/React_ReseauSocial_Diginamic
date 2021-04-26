@@ -16,7 +16,9 @@ const FormMessage = ({ onChange }) => {
       body: JSON.stringify({ contenu, confidentialite, author, desti }),
     }).then(() => { setTimeout( () => {
       //setMessage("Votre message a bien été publié");
-      onChange(); }, 2000);
+      onChange();
+      document.getElementById("messageUtilisateur").value = "";
+    }, 2000);
     });
   };
 
@@ -31,6 +33,7 @@ const FormMessage = ({ onChange }) => {
         className="form-control"
         placeholder="Votre message ici"
         rows="4"
+        id="messageUtilisateur"
         onChange={(e) => setContenu(e.target.value)}
       />
       <br />
