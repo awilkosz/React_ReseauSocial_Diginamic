@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import Message from './message';
 import FormMessage from './formMessage';
 
-const ListeMessages = () => {
+const ListeMessages = ({ nomProfil }) => {
     const [messages, setMessages] = useState([]);
     const [etreAmi, setEtreAmi] = useState([]);
     let isAmi;
@@ -47,6 +47,9 @@ const ListeMessages = () => {
             <div>
             {localStorage.getItem("userId") === localStorage.getItem("profilId") &&
                 <h2>Mes publications</h2>
+            }
+            {localStorage.getItem("userId") !== localStorage.getItem("profilId") &&
+                <h2>Messages concernant {nomProfil}</h2>
             }
                 {messages.map((message) => (
                 <Message key={message.id} message={message}></Message>

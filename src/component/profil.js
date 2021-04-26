@@ -90,7 +90,7 @@ const Profil = () => {
                                 <ListeAmis></ListeAmis>
                             </div>
                             <div className="col-6 bg-white m-2 rounded">
-                                <ListeMessages className="col"></ListeMessages>
+                                <ListeMessages className="col" nomProfil={utilisateur.name}></ListeMessages>
                             </div>
                             {
                                 localStorage.getItem("profilId") === localStorage.getItem("userId") &&
